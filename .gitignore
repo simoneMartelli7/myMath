@@ -1,0 +1,14 @@
+
+*.obj
+*.enc
+*.tlog
+*.xml
+x64/Debug/Vector.nativecodeanalysis.sarif
+x64/Debug/vcpkg.applocal.log
+*.pdb
+*.idb
+*.txt
+*.log
+*.ilk
+*.recipe
+*.exe
