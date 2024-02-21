@@ -12,3 +12,7 @@ x64/Debug/vcpkg.applocal.log
 *.ilk
 *.recipe
 *.exe
+*.vsidx
+.vs/myMath/v17/.suo
+*.db
+*.ipch

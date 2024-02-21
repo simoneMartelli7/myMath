@@ -21,23 +21,43 @@ int main() {
 	std::cout << u[3];*/
 
 	Matrix A = Matrix(3);
-	A.identity();
-	A.setElement(2, 1, 0.3);
-	Matrix B = Matrix(3);
-	B.identity();
-	B = B*3;
-	B.setElement(2, 1.3);
-	Matrix C = A * B;
-	C.print();
+	int i = 0;
+	A.setElement(0, 3);
+	A.setElement(1, 0);
+	A.setElement(2, 1);
+	A.setElement(3, 0);
+	A.setElement(4, 3);
+	A.setElement(5, 0);
+	A.setElement(6, 1);
+	A.setElement(7, 0);
+	A.setElement(8, 3);
 
+
+	A.print();
 	Vector u = Vector(3);
-	u.base(1);
-	u.setElement(2, 1);
-	
-	Matrix P = Matrix(3);
-	std::vector<float> factors = C.gaussianElimination(P);
-	C.print();
+	u.setElement(0, 1);
+	u.setElement(1, 3);
+	u.setElement(2, 3);
+	u.print();
+/*
+	A = Matrix(2);
+	A.setElement(0, 5);
+	A.setElement(1, 4);
+	A.setElement(2, 1);
+	A.setElement(3, 2);
 
+	float* eigenValues = new float[2] {0.0};
 
-	
+	std::unordered_map<float, Vector> eigen = A.qrEigen(10000, 1e-7, eigenValues);
+
+	std::cout << eigenValues[0] << "\n";
+	eigen[eigenValues[0]].print();
+
+	std::cout << eigenValues[1] << "\n";
+	eigen[eigenValues[1]].print();*/
+
+	Vector x0 = Vector(3);
+	Vector x = A.gradient(u, x0, 1e-7, 1e4);
+	x.print();
+
 }

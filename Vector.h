@@ -71,15 +71,17 @@ public:
 
 	//basic operations
 	Vector addition(Vector& v);
+	Vector subtraction(Vector& v);
 	Vector scalarProduct(float alpha);
 	float dotProduct(Vector& v);
 
 
 	//operators
-	Vector operator+(Vector& v) { return addition(v); };
+	Vector operator+(Vector& v)   { return addition(v); };
+	Vector operator-(Vector& v)   { return subtraction(v); };
 	Vector operator*(float alpha) { return scalarProduct(alpha); };
-	float operator*(Vector& v) { return dotProduct(v); };
-	float operator[](int i) { return data[i]; };
+	float operator*(Vector& v)    { return dotProduct(v); };
+	float operator[](int i)       { return data[i]; };
 
 
 	//norms

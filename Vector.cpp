@@ -16,6 +16,22 @@ Vector Vector::addition(Vector& v)
 	return result;
 }
 
+Vector Vector::subtraction(Vector& v) 
+{
+	if (v.getN() != getN()) {
+		std::cerr << "Incompatible dimensions\n";
+		exit(-1);
+	}
+
+	Vector result = Vector(v.getN());
+	int j = 0;
+	while (j < v.getN()) {
+		result.setElement(j, getElement(j) - v.getElement(j));
+		j++;
+	}
+	return result;
+}
+
 Vector Vector::scalarProduct(float alpha)
 {
 	Vector result = Vector(getN());
