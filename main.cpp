@@ -1,63 +1,49 @@
 #include "Vector.h"
 #include "Matrix.h"
+#include "approximation.h"
+
+
+static float fx(float x) {
+	return x * x + cos(2 * x) - 3;
+}
 
 int main() {
 	
-	/*float* data = new float[4];
-	int j = 0;
-	while (j < 4) {
-		data[j] = -j;
-		j++;
-	}
-	Vector u = Vector(4, data);
-	u.print();
-	Vector v = Vector(4);
-	v.base(2);
-	v.print();
+	/*
+	* 
+	* NEED TO IMPLEMENT A FUCKING EIGENVECTOR ALGORITHM, EIGENVALUES ARE OK
+	* 
+	  LAGRANGE POLYNOMIALS ARE UNFINISHED
 
-	v = v * 2.1;
+	  INTEGRATION FORMULAS ARE BEHAVING VERY WEIRDLY WTF???????????
 
-	float test = u.normInf();
-	std::cout << u[3];*/
+	  */
 
-	Matrix A = Matrix(3);
+	Matrix A = Matrix(2);
 	int i = 0;
-	A.setElement(0, 3);
-	A.setElement(1, 0);
+	A.setElement(0, 4);
+	A.setElement(1, 1);
 	A.setElement(2, 1);
-	A.setElement(3, 0);
-	A.setElement(4, 3);
-	A.setElement(5, 0);
-	A.setElement(6, 1);
-	A.setElement(7, 0);
-	A.setElement(8, 3);
+	A.setElement(3, 3);
 
+	Vector b = Vector(2);
+	b.setElement(0, 1);
+	b.setElement(1, 2);
 
-	A.print();
-	Vector u = Vector(3);
-	u.setElement(0, 1);
-	u.setElement(1, 3);
-	u.setElement(2, 3);
-	u.print();
-/*
-	A = Matrix(2);
-	A.setElement(0, 5);
-	A.setElement(1, 4);
-	A.setElement(2, 1);
-	A.setElement(3, 2);
+	Vector x0 = Vector(2);
+	x0.setElement(0, 2);
+	x0.setElement(1, 1);
 
-	float* eigenValues = new float[2] {0.0};
-
-	std::unordered_map<float, Vector> eigen = A.qrEigen(10000, 1e-7, eigenValues);
-
-	std::cout << eigenValues[0] << "\n";
-	eigen[eigenValues[0]].print();
-
-	std::cout << eigenValues[1] << "\n";
-	eigen[eigenValues[1]].print();*/
-
-	Vector x0 = Vector(3);
-	Vector x = A.gradient(u, x0, 1e-7, 1e4);
+	Vector x = A.gradient(b, x0, 1e-6, 1e3);
+	Vector x2 = A.gradient(b);
 	x.print();
+	x2.print();
+
+
+
+	
+	
+
 
 }
+

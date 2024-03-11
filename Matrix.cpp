@@ -1,6 +1,8 @@
 #include "Matrix.h"
 #include <iostream>
 
+//BASIC OPERATIONS
+
 void Matrix::identity()
 {
 	int counter = 0;
@@ -11,6 +13,16 @@ void Matrix::identity()
 		dummy.base(counter + 1);
 		setColumn(counter, dummy);
 		counter++;
+	}
+}
+
+void Matrix::random() {
+	int k = 0;
+	float value;
+	while (k < nRows*nCols) {
+		value = (float)(rand()) / (float)(RAND_MAX);
+		setElement(k, value);
+		k++;
 	}
 }
 
@@ -97,6 +109,30 @@ Vector Matrix::product(Vector& u)
 	return result;
 }
 
+Vector Matrix::leftProduct(Vector& u)
+{
+	if (nRows != u.getN()) {
+		std::cerr << "incompatible dimensions";
+		exit(-1);
+	}
+	Vector result = Vector(nCols);
+	int i, j;
+	float v_j;
+
+	j = 0;
+	while (j < nCols) {
+		v_j = 0;
+		i = 0;
+		while (i < nRows) {
+			v_j += u.getElement(i) * getElement(i, j);
+			j++;
+		}
+		result.setElement(i, v_j);
+		i++;
+	}
+	return result;
+}
+
 Matrix Matrix::addition(Matrix& B)
 {
 	if (nRows != B.getRows() || nCols != B.getCols()) {
@@ -131,7 +167,7 @@ Matrix Matrix::subtraction(Matrix& B)
 
 Matrix Matrix::transpose()
 {
-	Matrix result = Matrix(nRows, nCols);
+	Matrix result = Matrix(nCols, nRows);
 
 	int i = 0, j;
 	while (i < nCols) {
@@ -144,6 +180,34 @@ Matrix Matrix::transpose()
 	}
 	return result;
 }
+
+Matrix Matrix::diag(float value) 
+{
+	identity();
+	return scalarProduct(value);
+}
+
+Matrix Matrix::diag(std::unordered_map<int, float> values)
+{
+	int counter;
+	std::unordered_map<int, float>::iterator iterator;
+	Matrix result = Matrix(nRows, nCols);
+
+	counter = 0;
+	while (counter < nRows) {
+		iterator = values.begin();
+		while (iterator != values.end()) {
+			result.setElement(counter + nCols * counter + iterator->first, iterator->second);
+			iterator++;
+		}
+		counter++;
+	}
+	return result;
+}
+
+
+
+//BASIC HANDLING
 
 void Matrix::switchRows(int row1, int row2)
 {
@@ -212,6 +276,238 @@ void Matrix::setColumn(int j, Vector& column)
 	}
 }
 
+Matrix Matrix::removeRow(int i)
+{
+	Matrix result = Matrix(nRows - 1, nCols);
+	int k = 0;
+	
+	while (k < nCols * i) {
+		result.setElement(k, getElement(k));
+		k++;
+	}
+
+	k = k + nCols;
+	while (k < nCols * nRows) {
+		result.setElement(k - nCols, getElement(k));
+		k++;
+	}
+	return result;
+}
+
+Matrix Matrix::removeCol(int j)
+{
+	Matrix dummy = transpose();
+
+	return dummy.removeRow(j).transpose();
+}
+
+
+
+
+
+// ASSESSES VARIOUS QUALITIES OF THE MATRIX 
+
+int Matrix::emptyRow()
+{
+	int i, j;
+	int emptyRow;
+
+	i = 0;
+	while (i < nRows) {
+		j = 0;
+		emptyRow = 0;
+		while (j < nCols) {
+			emptyRow += getElement(i, j);
+			j++;
+		}
+		if (emptyRow == 0) {
+			return i;
+		}
+		i++;
+	}
+
+	std::cerr << "The matrix is full rank, use paluSolve or qrSolve";
+	exit(-1);
+}
+
+int* Matrix::emptyRows()
+{
+	int i, j;
+	int emptyRow;
+	int* emptyRows = new int[nRows] {0};
+
+	i = 0;
+	while (i < nRows) {
+		j = 0;
+		emptyRow = 0;
+		while (j < nCols) {
+			emptyRow += getElement(i, j);
+			j++;
+		}
+		if (emptyRow == 0) {
+			emptyRows[i] = 1;;
+		}
+		i++;
+	}
+	return emptyRows;
+}
+
+float Matrix::rho()
+{
+	float* eigen = new float[nRows] {0.0};
+	float max;
+	int i;
+
+	qrEigen(1e3, 1e-6, eigen);
+
+	i = 1;
+	max = abs(eigen[0]);
+	while (i < nRows) {
+		if (max < abs(eigen[i])) {
+			max = abs(eigen[i]);
+		}
+		i++;
+	}
+	return max;
+}
+
+float Matrix::rho(float* eigenValues)
+{
+	float max;
+	int i;
+
+	i = 1;
+	max = abs(eigenValues[0]);
+	while (i < nRows) {
+		if (max < abs(eigenValues[i])) {
+			max = abs(eigenValues[i]);
+		}
+		i++;
+	}
+	return max;
+}
+
+int Matrix::isSparse()
+{
+	int counter, i;
+	float k = 0.2; // this may need some tweaking 
+
+	counter = 0;
+	i = 0;
+	while (i < nRows) {
+		if (getElement(i) != 0) {
+			counter++;
+		}
+		i++;
+	}
+
+	return k * nRows* nCols > counter ? 1 : 0;
+}
+
+int Matrix::isDiagonallyDominantRows()
+{
+	float sum;
+	int i, j, flag = 2;
+
+	i = 0;
+	while (i < nRows) {
+		j = 0;
+		sum = 0;
+		while (j != i) {
+			sum += abs(getElement(i, j));
+			j++;
+		}
+		j++;
+		while (j < nCols) {
+			sum += abs(getElement(i, j));
+			j++;
+		}
+
+		if (abs(getElement(i, i)) > sum && flag == 2) {
+			i++;
+		}
+		else if (abs(getElement(i, i)) >= sum && (flag == 2 || flag == 1)) {
+			flag = 1;
+			i++;
+		}
+		else
+			return 0;
+	}
+	return flag;
+}
+
+int Matrix::isDiagonallyDominantCols()
+{
+	float sum;
+	int i, j, flag = 2;
+
+	i = 0;
+	while (i < nCols) {
+		j = 0;
+		sum = 0;
+		while (j != i) {
+			sum += abs(getElement(j, i));
+			j++;
+		}
+		j++;
+		while (j < nRows) {
+			sum += abs(getElement(j, i));
+			j++;
+		}
+
+		if (abs(getElement(i, i)) > sum && flag == 2) {
+			i++;
+		}
+		else if (abs(getElement(i, i)) >= sum && (flag == 2 || flag == 1)) {
+			flag = 1;
+			i++;
+		}
+		else
+			return 0;
+	}
+	return flag;
+}
+
+int Matrix::isSymmetric()
+{
+	int i, j;
+
+	i = 0;
+	while (i < nRows) {
+		j = i+1;
+		while (j < nCols) {
+			if (abs(getElement(i, j) - getElement(j, i)) > 1e-7) {
+				return 0;
+			}
+			j++;
+		}
+		i++;
+	}
+	return 1;
+}
+
+int Matrix::isSymmetricDefinitePositive()
+{
+	if (isSymmetric()) {
+		float* eigen = new float[nRows] {0.0};
+		qrEigen(1e3, 1e-7, eigen);
+		int i = 0;
+		while (i < nRows) {
+			if (eigen[i] < 0) {
+				//early exit when one eigenvalue is negative 
+				return 0;
+			}
+			i++;
+		}
+	}
+	return 1;
+}
+
+
+
+
+// FACTORIZATIONS
+
 int findMaxCol(int col, float* A, int firstRow, int n) {
 	float max = A[firstRow * n + col];
 	int maxIndex = firstRow;
@@ -226,7 +522,6 @@ int findMaxCol(int col, float* A, int firstRow, int n) {
 	}
 	return maxIndex;
 }
-
 std::vector<float> Matrix::gaussianElimination(Matrix& permutation) {
 
 	permutation.identity();
@@ -283,6 +578,32 @@ void Matrix::gaussianElimination()
 		exit(-1);
 	}
 
+	j = 0;
+	while (j < nCols) {
+		k = j + 1;
+		while (k < nRows) {
+			factor = -getElement(k, j) / getElement(j, j);
+			sumRows(k, j, factor);
+			k++;
+		}
+		j++;
+	}
+}
+
+void Matrix::gaussianSingular()
+{
+	int j = 0, indexMaxColumn, k;
+	float factor;
+
+	while (j < nRows - 1) {
+		indexMaxColumn = findMaxCol(j, data, j, nRows);
+		switchRows(j, indexMaxColumn);
+		j++;
+	}
+
+	int* zeroRows = emptyRows();
+	
+	
 	j = 0;
 	while (j < nCols) {
 		k = j + 1;
@@ -361,6 +682,47 @@ void Matrix::qr(Matrix& Q, Matrix& R)
 	}
 
 }
+
+Matrix Matrix::cholesky()
+{
+	if (!isSymmetricDefinitePositive()) {
+		std::cerr << "The matrix is not symmetric definite-positive";
+		exit(-1);
+	}
+
+	Matrix L = Matrix(nRows);
+	int i, j, k;
+	float sum;
+
+	j = 0;
+	while (j < nRows) {
+		sum = 0;
+		k = 0;
+		while (k < j) {
+			sum += L.getElement(j, k) * L.getElement(j, k);
+			k++;
+		}
+		L.setElement(j, j, sqrt(getElement(j, j) - sum));
+
+		i = j + 1;
+		while (i < nRows) {
+			sum = 0;
+			k = 0;
+			while (k < j) {
+				sum += L.getElement(i, k) * L.getElement(j, k);
+				k++;
+			}
+			L.setElement(i, j, 1.0 / L.getElement(j, j) * (getElement(i, j) - sum));
+			i++;
+		}
+		j++;
+	}
+	return L;
+}
+
+
+
+// LINEAR SYSTEMS, DIRECT 
 
 Vector Matrix::backwardSubstitution(Vector& b)
 {
@@ -442,56 +804,19 @@ Vector Matrix::diagSolve(Vector& b) {
 	return x;
 }
 
-std::unordered_map<float, Vector> Matrix::qrEigen(int maxIterations, float tol, float* eigenValues)
+Vector Matrix::choleskySolve(Vector& b)
 {
-	std::unordered_map<float, Vector> eigen;
-	Matrix Q = Matrix(nRows), R = Matrix(nRows), newA = Matrix(nRows), lambda_i = Matrix(nRows);
-	int numIter, i, j;
-	float eigenValue, eigNorm, err = 1;
-	float* eigenValues_k_1 = new float [nRows] {0.0};
+	Vector x = Vector(nRows), y = Vector(nRows);
+	Matrix L = cholesky(), Lt = L.transpose();
 
-	qr(Q, R);
+	y = L.forwardSubstitution(b);
+	x = Lt.backwardSubstitution(y);
 
-	numIter = 0;
-	while (numIter < maxIterations && err > tol) {
-		newA = R * Q;
-		newA.qr(Q, R);
-		i = 0;
-		err = 0;
-		while (i < nRows) {
-			eigenValues[i] = newA.getElement(i, i);
-			err = err + sqrt((eigenValues[i] - eigenValues_k_1[i]) * (eigenValues[i] - eigenValues_k_1[i]));
-			eigenValues_k_1[i] = eigenValues[i];
-			i++;
-		}
-		err = err / nRows;
-		numIter++;
-	}
-
-	i = 0;
-
-	while (i < nRows) {
-		eigenValue = eigenValues[i];
-		lambda_i.identity();
-		lambda_i = lambda_i * eigenValue;
-
-		Matrix dummy = subtraction(lambda_i);
-		dummy.gaussianElimination();
-		Vector eigenVector = Vector(nRows);
-		j = 0;
-		while (j < nRows) {
-			eigenVector.setElement(j, dummy.getElement(0, j));
-			j++;
-		}
-		eigNorm = eigenVector.norm();
-		eigenVector = eigenVector * (1.0 / eigNorm);
-
-		eigen[eigenValue] = eigenVector;
-		i++;
-	}
-	return eigen;
+	return x;
 }
 
+
+//LINEAR SYSTEMS, ITERATIVE
 
 Vector Matrix::jacobi(Vector& b,Vector& x, float tol, int maxIter)
 {
@@ -633,33 +958,106 @@ Vector Matrix::gaussSeidl(Vector& b)
 	return x;
 }
 
-
-
-// something's wrong... i can feel it 
 Vector Matrix::gradient(Vector& b, Vector& x, float tol, int maxIter)
 {
-	Vector z = Vector(nRows), r = Vector(nRows);
-	Vector dummy = product(x);
-	float normB = 1.0 / b.norm();
-	int i;
-	float err, alpha;
+	Vector t = product(x);
+	Vector r = b - t, p = r, rPlus = Vector(nRows), dummy = Vector(nRows);
+	int k;
+	float alpha, beta;
+	float err = r.norm();
 
-	r = b - dummy;
-	err = r.norm() * normB;
-	
-	i = 0;
-	while (i < maxIter && err > tol) {
-		z = product(r);
-		alpha = r * r / (r * z);
-		dummy = r * alpha;
+	k = 0;
+	while (k < maxIter && r.norm() > tol) {
+		t = product(p);
+		alpha = r.dotProduct(r) / p.dotProduct(t);
+		dummy = p * alpha;
 		x = x + dummy;
-		dummy = z * alpha;
-		z = z - dummy;
+		dummy = t * alpha;
+		rPlus = r - dummy;
+		beta = rPlus.dotProduct(rPlus) / (r.dotProduct(r));
+		dummy = p * beta;
+		p = rPlus + dummy;
+		r = rPlus;
+		k++;
+	}
+	return x;
+}
 
-		err = r.norm() * normB;
-		std::cout << "Iter. n: " << i << " err: " << err << "\n";
-		i++;
+Vector Matrix::gradient(Vector& b)
+{
+	Vector x = Vector(nRows);
+	x.random();
+	Vector t = product(x);
+	Vector r = b - t, p = r, rPlus = Vector(nRows), dummy = Vector(nRows);
+	int k, maxIter = 1e4;
+	float alpha, beta, tol = 1e-7;
+	float err = r.norm();
+
+	k = 0;
+	while (k < maxIter && r.norm() > tol) {
+		t = product(p);
+		alpha = r.dotProduct(r) / p.dotProduct(t);
+		dummy = p * alpha;
+		x = x + dummy;
+		dummy = t * alpha;
+		rPlus = r - dummy;
+		beta = rPlus.dotProduct(rPlus) / (r.dotProduct(r));
+		dummy = p * beta;
+		p = rPlus + dummy;
+		r = rPlus;
+		k++;
+	}
+	return x;
+}
+
+Vector gmres(Vector& b, Vector& x0, float tol, int maxIter)
+{
+	return x0;
+}
+
+// NOT ACTUALLY IMPLEMENTED
+Vector Matrix::solve(Vector& b) 
+{
+	return paluSolve(b);
+}
+
+
+
+
+// EIGENVALUES
+
+void Matrix::qrEigen(int maxIterations, float tol, float* eigenValues)
+{
+	std::unordered_map<float, Vector> eigen;
+	Matrix Q = Matrix(nRows), R = Matrix(nRows), newA = Matrix(nRows), eigenVectors = Matrix(nRows);
+	int numIter, i;
+	float err = 1;
+	float* eigenValues_k_1 = new float [nRows] {0.0};
+
+	qr(Q, R);
+	eigenVectors.identity();
+
+	numIter = -1;
+	while (numIter++ < maxIterations && err > tol) {
+		newA = R * Q;
+		newA.qr(Q, R);
+		i = -1;
+		err = 0;
+		//eigenVectors = eigenVectors * Q;
+		while (i++ < nRows) {
+			eigenValues[i] = newA.getElement(i, i);
+			err = err + sqrt((eigenValues[i] - eigenValues_k_1[i]) * (eigenValues[i] - eigenValues_k_1[i]));
+			eigenValues_k_1[i] = eigenValues[i];
+			//i++;
+		}
+		err = err / nRows;
+		//numIter++;
 	}
 
-	return x;
+	/*i = 0;
+	while (i < nCols) {
+		eigen[eigenValues[i]] = eigenVectors.extractColumn(i);
+		i++;
+	}*/
+	//return eigen;
 }

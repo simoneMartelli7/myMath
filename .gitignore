@@ -16,3 +16,6 @@ x64/Debug/vcpkg.applocal.log
 .vs/myMath/v17/.suo
 *.db
 *.ipch
+.vs/myMath/v17/Browse.VC.db-shm
+.vs/myMath/v17/Browse.VC.db-wal
+.vs/myMath/v17/Browse.VC.opendb

@@ -41,6 +41,17 @@ public:
 		test.base(i);
 		return test;
 	};
+
+	//fills the vector with random data in the range [0, 1]
+	void random() {
+		int k = 0;
+		float value;
+		while (k < n) {
+			value = (float)(rand()) / (float)(RAND_MAX);
+			setElement(k, value);
+			k++;
+		}
+	}
 	//print
 	void print() {
 		int j = 0;
