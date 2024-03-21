@@ -301,6 +301,66 @@ Matrix Matrix::removeCol(int j)
 	return dummy.removeRow(j).transpose();
 }
 
+Matrix Matrix::rotate(float theta)
+{
+	if (nCols == 2)
+	{
+		Matrix rotation = Matrix(2);
+		rotation.setElement(0,  cos(theta));
+		rotation.setElement(1, -sin(theta));
+		rotation.setElement(2,  sin(theta));
+		rotation.setElement(3,  cos(theta));
+
+		return product(rotation);
+	}
+	else if (nCols == 3)
+	{
+		Matrix rotation = Matrix(3);
+		rotation.setElement(0, 1);
+		rotation.setElement(4,  cos(theta));
+		rotation.setElement(5, -sin(theta));
+		rotation.setElement(7,  sin(theta));
+		rotation.setElement(8,  cos(theta));
+
+		return product(rotation);
+	}
+
+}
+
+Matrix Matrix::rotate(float alpha, float beta, float gamma)
+{
+
+	if (nCols != 3) {
+		std::cerr << "Function only implemented for 3x3 matrices";
+		exit(-1);
+	}
+
+	Matrix rotation = Matrix(3), r_i = Matrix(3);
+
+	rotation.setElement(0, cos(alpha));
+	rotation.setElement(1, -sin(alpha));
+	rotation.setElement(3, sin(alpha));
+	rotation.setElement(4, cos(alpha));
+	rotation.setElement(8, 1);
+
+	r_i.setElement(0, cos(beta));
+	r_i.setElement(2, sin(beta));
+	r_i.setElement(4, 1);
+	r_i.setElement(6, -sin(beta));
+	r_i.setElement(8, cos(beta));
+
+	rotation = rotation * r_i;
+
+	r_i.setElement(0, 1);
+	r_i.setElement(4, cos(gamma));
+	r_i.setElement(5, -sin(gamma));
+	r_i.setElement(7, sin(gamma));
+	r_i.setElement(8, cos(gamma));
+
+	rotation = rotation * r_i;
+
+	return product(rotation);
+}
 
 
 
@@ -1010,15 +1070,28 @@ Vector Matrix::gradient(Vector& b)
 	return x;
 }
 
-Vector gmres(Vector& b, Vector& x0, float tol, int maxIter)
+/*Vector Matrix::gmres(Vector& b, Vector& x0, float tol, int maxIter)
 {
-	return x0;
-}
+	Vector r = Vector(nRows), dummy = product(x0);
+	float err = 1, beta;
+	float* cs = new float[maxIter];
+	float* sn = new float[maxIter];
+
+	r = b - dummy;
+	err = r.norm();
+	beta = err;
+
+}*/
 
 // NOT ACTUALLY IMPLEMENTED
 Vector Matrix::solve(Vector& b) 
 {
-	return paluSolve(b);
+	if (isSparse()) {
+		return gradient(b);
+	}
+	else {
+		return paluSolve(b);
+	}
 }
 
 

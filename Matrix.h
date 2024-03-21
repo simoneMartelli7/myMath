@@ -86,6 +86,10 @@ public:
 	Matrix removeCol(int j);
 	// constructs a 1xn matrix as the transpose of a n-vector 
 	//Matrix vectorTranspose(Vector& u);
+	//rotates the matrix' column space of an angle theta, in 3D defaults to rotation around x-axis
+	Matrix rotate(float theta);
+	//rotates a matrix' 3-dimensional column space, notations is of standard euler angles
+	Matrix rotate(float alpha, float beta, float gamma);
 	
 
 
