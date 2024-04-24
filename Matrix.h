@@ -158,7 +158,7 @@ public:
 	//defaults the initial guess to a random vector, tol to 1e-7, maxIter to 1e4
 	Vector gradient(Vector& b);
 	// general minimal residual method with Arnoldi iteration
-	Vector gmres(Vector& b, Vector& x0, float tol, int maxIter);
+	//Vector gmres(Vector& b, Vector& x0, float tol, int maxIter);
 
 
 

@@ -1,20 +1,21 @@
 #include "Vector.h"
 #include "Matrix.h"
 #include <functional>
+#include "polynomial.h"
 
 
 // FITTING
 
-//returns the coefficient of the polynomial of degree n fitting the data y(x)
-float* polynomialFitting(Vector& x, Vector& y);
+//returns the polynomial of degree n fitting the data y(x)
+polynomial polynomialFitting(Vector& x, Vector& y);
 
 //returns the value of the polynomial p(x) 
 float polynomialFitting(Vector& x, Vector& y, float x0);
 
 //returns the least square approximation to degree deg of the data 
-float* leastSquareFitting(Vector& x, Vector& y, int deg);
+polynomial leastSquareFitting(Vector& x, Vector& y, int deg);
 
-float* lagrangePoly(Vector& x, Vector& y);
+polynomial lagrangePoly(Vector& x, Vector& y);
 
 
 // INTEGRALS

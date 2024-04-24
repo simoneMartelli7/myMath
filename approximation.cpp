@@ -1,7 +1,7 @@
 #include "approximation.h"
 #include "finiteDifferences.h"
 
-float* polynomialFitting(Vector& x, Vector& y)
+polynomial polynomialFitting(Vector& x, Vector& y)
 {
 	int i, j;
 	int deg = x.getN();
@@ -26,26 +26,17 @@ float* polynomialFitting(Vector& x, Vector& y)
 
 	C = A.paluSolve(y);
 
-	return C.copyData();
+	return polynomial(deg - 1, C.copyData());
 }
 
 float polynomialFitting(Vector& x, Vector& y, float x0)
 {
-	int i;
-	float* coeffs = polynomialFitting(x, y);
-	float result;
+	polynomial poly = polynomialFitting(x, y);
 
-	i = 0;
-	result = 0;
-	while (i < x.getN()) {
-		result = result + coeffs[i] * pow(x0, i);
-		i++;
-	}
-
-	return result;
+	return poly.eval(x0);
 }
 
-float* leastSquareFitting(Vector& x, Vector& y, int deg)
+polynomial leastSquareFitting(Vector& x, Vector& y, int deg)
 {
 	int i, j;
 	Matrix A = Matrix(x.getN(), deg+1);
@@ -68,48 +59,40 @@ float* leastSquareFitting(Vector& x, Vector& y, int deg)
 
 	C = A.paluSolve(y);
 
-	return C.copyData();
+	return polynomial(deg, C.copyData());
 }
 
 
-float* lagrangePoly(Vector& x, Vector& y)
+polynomial lagrangePoly(Vector& x, Vector& y)
 {
-	float denominator, dummy, x_i;
-	int i, n = x.getN(), j;
-	float* coeffs = new float[n];
-		
-	if (n != y.getN()) {
-		std::cerr << "Input error: incompatible dimensions";
-		exit(-1);
-	}
+	float denominator = 1, x_i;
+	int i, k;
+	polynomial result = polynomial();
+	polynomial dummy1 = polynomial(1), dummy2 = polynomial(1);
 
-	i = 0;
-	denominator = 1;
-	while (i < n) {
-		x_i = x.getElement(i);
-		j = 0;
-		while (j < i) {
-			dummy = x_i - x.getElement(j);
-			denominator *= dummy;
-			j++;
-		}
-		j = i + 1;
-		while (j < n) {
-			dummy = x_i - x.getElement(j);
-			denominator *= dummy;
-			j++;
-		} 
-
-		i++;
+	x_i = x[0];
+	dummy1.setCoeff(0, x[1]);
+	dummy1.setCoeff(1, 1);
+	k = 2;
+	while (k < x.getN()) {
+		dummy2.setCoeff(0, x[k]);
+		dummy2.setCoeff(1, 1);
+		denominator = denominator * (x_i - x[k]);
+		dummy1 = dummy1.product(dummy2);
+		k++;
 	}
-	return coeffs;
+	dummy1 = dummy1.scalarProduct(y[0] / denominator);
+	result = result.sum(dummy1);
+
+	return result;
+	
 }
 
 
 
 Vector createNodes(float lowerLimit, float upperLimit, int nIntervals)
 {
-	float delta = (upperLimit - lowerLimit) / nIntervals;
+	float delta = (upperLimit - lowerLimit) / (nIntervals-1);
 	int i = 0;
 	Vector nodes = Vector(nIntervals);
 
