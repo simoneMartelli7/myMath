@@ -40,8 +40,17 @@ int main() {
 
 	Vector y = fillNodes(x, fx);
 
-	polynomial la = lagrangePoly(x, y);
+	polynomial la = polynomial(3);
+	la.setCoeff(3, 1);
+	la.setCoeff(1, -1);
+	la.setCoeff(0, -24);
 	la.print();
+
+	polynomial r = polynomial(1);
+	r.setCoeff(0, -3);
+
+	polynomial div = la.division(r);
+	div.print();
 
 
 

@@ -140,3 +140,31 @@ polynomial polynomial::scalarProduct(float alpha)
 	}
 	return result;
 }
+
+polynomial polynomial::division(polynomial& r)
+{
+	if (r.getDegree() != 1) {
+		std::cerr << "currently implemented for degree 1 polynomials as divisor";
+		exit(-1);
+	}
+
+	polynomial result = polynomial(degree - 1);
+	float k = -r.getCoeff(0), dummy;
+	int i;
+
+	i = degree-1;
+	result.setCoeff(degree - 1, 1);
+	dummy = 1;
+	while (i > 0) {
+		dummy = k * dummy;
+		dummy += getCoeff(i);
+		result.setCoeff(i - 1, dummy);
+		i--;
+	}
+
+	if (k * dummy != -getCoeff(0)) {
+		std::cerr << "the polynomial is not an exact divisor";
+		exit(-1);
+	}
+	return result;
+}

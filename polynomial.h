@@ -51,6 +51,15 @@ public:
 	polynomial subtraction(polynomial& r);
 	polynomial product(polynomial& r);
 	polynomial scalarProduct(float alpha);
+	polynomial division(polynomial& r);
+
+	//operators 
+	polynomial operator+(polynomial& r) { return sum(r); };
+	polynomial operator-(polynomial& r) { return subtraction(r); };
+	polynomial operator*(polynomial& r) { return product(r); };
+	polynomial operator*(float alpha) { return scalarProduct(alpha); };
+	polynomial operator/(polynomial& r) { return division(r); };
+
 };
 
 // FIX STRANGE STUFF WITH DEGREES
