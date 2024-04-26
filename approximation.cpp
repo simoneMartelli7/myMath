@@ -65,31 +65,45 @@ polynomial leastSquareFitting(Vector& x, Vector& y, int deg)
 
 polynomial lagrangePoly(Vector& x, Vector& y)
 {
-	float denominator = 1, x_i;
+	float denominator, x_k;
 	int i, k;
 	polynomial result = polynomial();
-	polynomial dummy1 = polynomial(1), dummy2 = polynomial(1);
+	polynomial dummy1 = polynomial(1);
 
-	x_i = x[0];
-	dummy1.setCoeff(0, x[1]);
-	dummy1.setCoeff(1, 1);
-	k = 2;
+	result.clear();
+	k = 0;
 	while (k < x.getN()) {
-		dummy2.setCoeff(0, x[k]);
-		dummy2.setCoeff(1, 1);
-		denominator = denominator * (x_i - x[k]);
-		dummy1 = dummy1.product(dummy2);
+		x_k = x[k];
+		i = 0;
+		polynomial dummy2 = polynomial(0);
+		dummy2.setCoeff(0, 1);
+		denominator = 1;
+		while (i < k) {
+			dummy1.setCoeff(0, -x[i]);
+			dummy1.setCoeff(1, 1);
+			denominator = denominator * (x_k - x[i]);
+			i++;
+			dummy2 = dummy2.product(dummy1);
+		}
+		i++;
+		while (i < x.getN()) {
+			dummy1.setCoeff(0, -x[i]);
+			dummy1.setCoeff(1, 1);
+			denominator = denominator * (x_k - x[i]);
+			i++;
+			dummy2 = dummy2.product(dummy1);
+		}
+		dummy2 = dummy2.scalarProduct(y[k] / denominator);
+		result = result.sum(dummy2);
 		k++;
 	}
-	dummy1 = dummy1.scalarProduct(y[0] / denominator);
-	result = result.sum(dummy1);
 
 	return result;
 	
 }
 
 
-
+//this are mainly for debugging
 Vector createNodes(float lowerLimit, float upperLimit, int nIntervals)
 {
 	float delta = (upperLimit - lowerLimit) / (nIntervals-1);

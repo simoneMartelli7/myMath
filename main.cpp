@@ -35,19 +35,14 @@ int main() {
 	x0.setElement(0, 2);
 	x0.setElement(1, 1);
 
-	Vector x = Vector(3);
-	x.setElement(0, -2);
-	x.setElement(1, 1);
-	x.setElement(2, 3);
-	//x.print();
+	Vector x = createNodes(-0.1, 0.1, 6);
+	x.print();
 
-	Vector y = Vector(3);
-	y.setElement(0, 3);
-	y.setElement(1, -7);
-	y.setElement(2, -5);
+	Vector y = fillNodes(x, fx);
 
 	polynomial la = lagrangePoly(x, y);
 	la.print();
+
 
 
 
