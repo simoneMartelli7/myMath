@@ -22,7 +22,7 @@
     <ClInclude Include="approximation.h" />
     <ClInclude Include="finiteDifferences.h" />
     <ClInclude Include="Matrix.h" />
-    <ClInclude Include="ODE.h" />
+    <ClInclude Include="ODE1.h" />
     <ClInclude Include="polynomial.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
@@ -31,7 +31,7 @@
     <ClCompile Include="finiteDifferences.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
-    <ClCompile Include="ODE.cpp" />
+    <ClCompile Include="ODE1.cpp" />
     <ClCompile Include="polynomial.cpp" />
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>

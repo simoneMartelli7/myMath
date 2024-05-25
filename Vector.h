@@ -4,7 +4,9 @@
 class Vector
 {
 private:
+	//dimension
 	int n;
+	//contains the values of the vector 
 	float* data;
 public:
 	// default constructor

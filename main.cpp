@@ -2,10 +2,14 @@
 #include "Matrix.h"
 #include "approximation.h"
 #include "polynomial.h"
+#include "ODE1.h"
 
+float fx(float t, float u) {
+	return sin(t) + u;
+}
 
-static float fx(float x) {
-	return sin(x);
+float uEx(float t) {
+	return 0.5 * (exp(t) - sin(t) - cos(t));
 }
 
 int main() {
@@ -13,14 +17,12 @@ int main() {
 	/*
 	* 
 	* NEED TO IMPLEMENT A FUCKING EIGENVECTOR ALGORITHM, EIGENVALUES ARE OK
-	* 
-	  LAGRANGE POLYNOMIALS ARE UNFINISHED
 
 	  INTEGRATION FORMULAS ARE BEHAVING VERY WEIRDLY WTF???????????
 
 	  */
 
-	Matrix A = Matrix(2);
+	/*Matrix A = Matrix(2);
 	int i = 0;
 	A.setElement(0, 4);
 	A.setElement(1, 1);
@@ -50,11 +52,31 @@ int main() {
 	r.setCoeff(0, -3);
 
 	polynomial div = la.division(r);
-	div.print();
+	div.print();*/
 
+	float cauchy = 0;
+	float t0 = 15;
 
+	ODE1 test = ODE1(fx, cauchy, t0);
 
+	float T = 1;
+	float deltaT = 0.1;
 
+	float* u = test.explicitEuler(T, deltaT);
+	float* err = new float[T / deltaT];
+
+	int i = 0;
+	while (i < T / deltaT) {
+		float uAn = uEx(t0 + deltaT * i);
+		err[i] = abs(uAn - u[i]) / abs(uAn);
+		i++;
+	}
+
+	i = 0;
+	while (i < T / deltaT) {
+		std::cout << " " << u[i] << " ";
+		i++;
+	}
 	
 
 

@@ -27,7 +27,10 @@
     <ClInclude Include="finiteDifferences.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ODE.h">
+    <ClInclude Include="ODE1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="polynomial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,7 +50,10 @@
     <ClCompile Include="finiteDifferences.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ODE.cpp">
+    <ClCompile Include="ODE1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="polynomial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

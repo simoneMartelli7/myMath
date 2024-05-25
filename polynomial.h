@@ -9,7 +9,9 @@ class polynomial
 {
 	
 private:
+	// degree of the polynomial 
 	int degree;
+	//array containing the coefficients of the polynomial stored from lesser to greater, e.g: coeffs[3] points to the coefficient of the third degree term 
 	float* coeffs;
 public:
 	polynomial() {

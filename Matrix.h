@@ -5,8 +5,11 @@
 class Matrix
 {
 private:
+	//# of rows
 	int nRows;
+	//# of columns
 	int nCols;
+	//# array containing the values of the matrix stored row by row 
 	float* data;
 public:
 	//default constructor
