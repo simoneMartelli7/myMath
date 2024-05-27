@@ -54,29 +54,47 @@ int main() {
 	polynomial div = la.division(r);
 	div.print();*/
 
-	float cauchy = 0;
-	float t0 = 15;
+	float cauchy = 1;
+	float t0 = 0;
 
 	ODE1 test = ODE1(fx, cauchy, t0);
 
 	float T = 1;
 	float deltaT = 0.1;
 
-	float* u = test.explicitEuler(T, deltaT);
-	float* err = new float[T / deltaT];
+	float* uEE = test.explicitEuler(T, deltaT);
+	
+	int s = 3;
+	float* a = new float[3];
+	a[0] = 0.25;
+	a[1] = 0;
+	a[2] = 0.75;
+	float* b = new float[3];
+	b[0] = 0;
+	b[1] = 1.0/3;
+	b[2] = 2.0/3;
+	float* c = new float[9] {0.0};
+	c[3] = 1.0 / 3;
+	c[6] = 0;
+	c[7] = 2.0 / 3;
+
+	float* uRK = test.rungeKutta(T, deltaT, 3, a, b, c);
+	
 
 	int i = 0;
 	while (i < T / deltaT) {
-		float uAn = uEx(t0 + deltaT * i);
-		err[i] = abs(uAn - u[i]) / abs(uAn);
+		std::cout << " " << uEE[i] << " ";
 		i++;
 	}
 
+	std::cout << "\n";
 	i = 0;
 	while (i < T / deltaT) {
-		std::cout << " " << u[i] << " ";
+		std::cout << " " << uRK[i] << " ";
 		i++;
 	}
+
+	
 	
 
 

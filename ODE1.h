@@ -31,6 +31,12 @@ public:
 
 	// EXPLIXCIT METHODS 
 	float* explicitEuler(float T, float deltaT);
+	float* heun(float T, float deltaT);
+	float* modifiedEuler(float T, float deltaT);
+	float* rungeKutta(float T, float deltaT, int s, float* a, float* b, float* c);
+
+	// IMPLICIT METHODS 
+
 
 };
 
