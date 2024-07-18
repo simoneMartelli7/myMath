@@ -7,7 +7,7 @@
 #include "functionalVector.h"
 
 float fx(float u) {
-	return u;
+	return 4.0 / (u * u + 1);
 }
 
 float fy(float u) {
@@ -24,7 +24,7 @@ int main() {
 
 	  */
 
-	Matrix A = Matrix(2);
+	/*Matrix A = Matrix(2);
 	Vector cauchy = Vector(2);
 	float t0 = 0;
 
@@ -52,9 +52,12 @@ int main() {
 		std::cout << "Heun: \n";
 		uheun[i].print();
 		i++;
-	}
+	}*/
 
 
+	float integr = trapz(0, 1, 15, fx);
+
+	std::cout << integr;
 	
 }
 

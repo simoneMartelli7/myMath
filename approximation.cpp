@@ -160,14 +160,14 @@ float trapz(float lowerLimit, float upperLimit, int N, std::function<float(float
 	h = (upperLimit - lowerLimit) / N;
 
 	i = 1;
-	integral = 0.5 * (f(upperLimit) + f(lowerLimit));
+	integral = f(upperLimit) + f(lowerLimit);
 
-	while (i < N-1) {
-		integral += f(lowerLimit + h * i);
+	while (i < N) {
+		integral += 2*f(lowerLimit + h * i);
 		i++;
 	}
 
-	return integral * h;
+	return 0.5 * integral * h;
 }
 
 float simpson(Vector& x, Vector& y)
@@ -201,11 +201,11 @@ float simpson(float lowerLimit, float upperLimit, int N, std::function<float(flo
 
 	integral = f(lowerLimit) + f(upperLimit);
 	h = (upperLimit - lowerLimit) / N;
-	integral += 4 * f(lowerLimit + 0.5 * h);
 
-	k = 2;
-	while (k < N - 1) {
-		integral += (2 * f(lowerLimit + k * h) + 4 * f(lowerLimit + h * (k + 0.5 * h)));
+	integral += 4*f(lowerLimit + 0.5 * h);
+	k = 1;
+	while (k < N) {
+		integral += (2 * f(lowerLimit + k * h) + 4 * f(lowerLimit + (k + 0.5 ) * h));
 		k++;
 	}
 
