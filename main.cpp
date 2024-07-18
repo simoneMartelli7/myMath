@@ -4,9 +4,14 @@
 #include "polynomial.h"
 #include "ODE1.h"
 #include "ODE.h"
+#include "functionalVector.h"
 
-float fx(float t, float u) {
-	return sin(t) + u;
+float fx(float u) {
+	return u;
+}
+
+float fy(float u) {
+	return cos(u);
 }
 
 int main() {
@@ -30,16 +35,26 @@ int main() {
 	A.setElement(2, -2);
 	A.setElement(3, -3);
 
-	ODE test = ODE(A, cauchy, t0);
+	std::vector <std::function<float(float)>> testF = { fx, fy };
+	functionalVector testV = functionalVector(testF);
 
-	Vector* uEE = test.eulerExplicit(0.1, 10);
+	ODE testForcing = ODE(A, cauchy, t0, testV);
+	ODE testNoForcing = ODE(A, cauchy, t0);
+
+	Vector* uEE = testForcing.explicitEuler(0.1, 10);
+	Vector* uheun = testForcing.heun(0.1, 10);
 	
 	int i = 0;
-	while (i < 25) {
+	while (i < 5) {
+
+		std::cout << "Euler: \n";
 		uEE[i].print();
+		std::cout << "Heun: \n";
+		uheun[i].print();
 		i++;
 	}
 
 
+	
 }
 

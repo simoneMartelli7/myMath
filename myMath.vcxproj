@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="approximation.h" />
     <ClInclude Include="finiteDifferences.h" />
+    <ClInclude Include="functionalVector.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="ODE.h" />
     <ClInclude Include="ODE1.h" />
@@ -30,6 +31,7 @@
   <ItemGroup>
     <ClCompile Include="approximation.cpp" />
     <ClCompile Include="finiteDifferences.cpp" />
+    <ClCompile Include="functionalVector.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="ODE.cpp" />
