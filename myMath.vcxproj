@@ -21,8 +21,10 @@
   <ItemGroup>
     <ClInclude Include="approximation.h" />
     <ClInclude Include="finiteDifferences.h" />
+    <ClInclude Include="functionalMatrix.h" />
     <ClInclude Include="functionalVector.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="nonLinearSystems.h" />
     <ClInclude Include="ODE.h" />
     <ClInclude Include="ODE1.h" />
     <ClInclude Include="polynomial.h" />
@@ -31,9 +33,11 @@
   <ItemGroup>
     <ClCompile Include="approximation.cpp" />
     <ClCompile Include="finiteDifferences.cpp" />
+    <ClCompile Include="functionalMatrix.cpp" />
     <ClCompile Include="functionalVector.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="nonLinearSystems.cpp" />
     <ClCompile Include="ODE.cpp" />
     <ClCompile Include="ODE1.cpp" />
     <ClCompile Include="polynomial.cpp" />

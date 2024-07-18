@@ -7,24 +7,12 @@
       "RelativeMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|C:\\Users\\Simone\\Documents\\GitHub\\myMath\\approximation.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|solutionrelative:approximation.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|C:\\Users\\Simone\\Documents\\GitHub\\myMath\\functionalMatrix.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|solutionrelative:functionalMatrix.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|C:\\Users\\Simone\\Documents\\GitHub\\myMath\\approximation.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|solutionrelative:approximation.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|C:\\Users\\Simone\\Documents\\GitHub\\myMath\\ODE.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|solutionrelative:ODE.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|C:\\Users\\Simone\\Documents\\GitHub\\myMath\\ODE.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|solutionrelative:ODE.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|C:\\Users\\Simone\\Documents\\GitHub\\myMath\\ODE1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|solutionrelative:ODE1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|C:\\Users\\Simone\\Documents\\GitHub\\myMath\\functionalMatrix.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|solutionrelative:functionalMatrix.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|C:\\Users\\Simone\\Documents\\GitHub\\myMath\\functionalVector.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -33,6 +21,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|C:\\Users\\Simone\\Documents\\GitHub\\myMath\\functionalVector.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|solutionrelative:functionalVector.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|C:\\Users\\Simone\\Documents\\GitHub\\myMath\\ODE.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|solutionrelative:ODE.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|C:\\Users\\Simone\\Documents\\GitHub\\myMath\\ODE.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B705A411-0C17-4153-86F8-6581BAB67D8F}|myMath.vcxproj|solutionrelative:ODE.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -51,71 +47,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "approximation.cpp",
-              "DocumentMoniker": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\approximation.cpp",
-              "RelativeDocumentMoniker": "approximation.cpp",
-              "ToolTip": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\approximation.cpp",
-              "RelativeToolTip": "approximation.cpp",
-              "ViewState": "AQIAAJkAAAAAAAAAAAAAAKcAAAACAAAA",
+              "Title": "functionalMatrix.cpp",
+              "DocumentMoniker": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\functionalMatrix.cpp",
+              "RelativeDocumentMoniker": "functionalMatrix.cpp",
+              "ToolTip": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\functionalMatrix.cpp",
+              "RelativeToolTip": "functionalMatrix.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-18T10:28:27.391Z",
+              "WhenOpened": "2024-07-18T12:40:47.547Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "approximation.h",
-              "DocumentMoniker": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\approximation.h",
-              "RelativeDocumentMoniker": "approximation.h",
-              "ToolTip": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\approximation.h",
-              "RelativeToolTip": "approximation.h",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAQAAAAAAAAA",
+              "Title": "functionalMatrix.h",
+              "DocumentMoniker": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\functionalMatrix.h",
+              "RelativeDocumentMoniker": "functionalMatrix.h",
+              "ToolTip": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\functionalMatrix.h",
+              "RelativeToolTip": "functionalMatrix.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-07-18T10:28:19.684Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ODE.cpp",
-              "DocumentMoniker": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\ODE.cpp",
-              "RelativeDocumentMoniker": "ODE.cpp",
-              "ToolTip": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\ODE.cpp",
-              "RelativeToolTip": "ODE.cpp",
-              "ViewState": "AQIAAEgAAAAAAAAAAAAAAFYAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-18T08:48:29.645Z",
+              "WhenOpened": "2024-07-18T12:36:47.811Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ODE.h",
-              "DocumentMoniker": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\ODE.h",
-              "RelativeDocumentMoniker": "ODE.h",
-              "ToolTip": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\ODE.h",
-              "RelativeToolTip": "ODE.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADIAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-07-18T08:48:28.375Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ODE1.cpp",
-              "DocumentMoniker": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\ODE1.cpp",
-              "RelativeDocumentMoniker": "ODE1.cpp",
-              "ToolTip": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\ODE1.cpp",
-              "RelativeToolTip": "ODE1.cpp",
-              "ViewState": "AQIAADYAAAAAAAAAAAAAAB4AAAAzAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-18T09:45:53.225Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
               "Title": "functionalVector.cpp",
               "DocumentMoniker": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\functionalVector.cpp",
               "RelativeDocumentMoniker": "functionalVector.cpp",
@@ -128,28 +85,53 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "main.cpp",
-              "DocumentMoniker": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\main.cpp",
-              "RelativeDocumentMoniker": "main.cpp",
-              "ToolTip": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\main.cpp*",
-              "RelativeToolTip": "main.cpp*",
-              "ViewState": "AQIAACoAAAAAAAAAAAAAADkAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-18T09:05:57.806Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "functionalVector.h",
               "DocumentMoniker": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\functionalVector.h",
               "RelativeDocumentMoniker": "functionalVector.h",
               "ToolTip": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\functionalVector.h",
               "RelativeToolTip": "functionalVector.h",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA8AAAASAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABUAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-07-18T08:49:27.671Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ODE.cpp",
+              "DocumentMoniker": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\ODE.cpp",
+              "RelativeDocumentMoniker": "ODE.cpp",
+              "ToolTip": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\ODE.cpp",
+              "RelativeToolTip": "ODE.cpp",
+              "ViewState": "AQIAADsAAAAAAAAAAAAowFYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-18T08:48:29.645Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ODE.h",
+              "DocumentMoniker": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\ODE.h",
+              "RelativeDocumentMoniker": "ODE.h",
+              "ToolTip": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\ODE.h",
+              "RelativeToolTip": "ODE.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADIAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-18T08:48:28.375Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "main.cpp",
+              "DocumentMoniker": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\main.cpp",
+              "RelativeDocumentMoniker": "main.cpp",
+              "ToolTip": "C:\\Users\\Simone\\Documents\\GitHub\\myMath\\main.cpp",
+              "RelativeToolTip": "main.cpp",
+              "ViewState": "AQIAACoAAAAAAAAAAAAAAD4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-18T09:05:57.806Z",
               "EditorCaption": ""
             }
           ]

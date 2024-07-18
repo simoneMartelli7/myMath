@@ -5,13 +5,14 @@
 #include "ODE1.h"
 #include "ODE.h"
 #include "functionalVector.h"
+#include "functionalMatrix.h"
 
-float fx(float u) {
-	return 4.0 / (u * u + 1);
+float fx(float* u) {
+	return 4.0 / (u[0] * u[1] + 1);
 }
 
-float fy(float u) {
-	return cos(u);
+float fy(float* u) {
+	return cos(u[0]) - sin(u[1]);
 }
 
 int main() {
@@ -19,8 +20,6 @@ int main() {
 	/*
 	* 
 	* NEED TO IMPLEMENT A FUCKING EIGENVECTOR ALGORITHM, EIGENVALUES ARE OK
-
-	  INTEGRATION FORMULAS ARE BEHAVING VERY WEIRDLY WTF???????????
 
 	  */
 
@@ -54,10 +53,19 @@ int main() {
 		i++;
 	}*/
 
+	int i = 0;
+	std::vector<std::function<float(float*)>> dummyF = { fx, fy, fy, fx };
+	int n = 2;
+	functionalMatrix test = functionalMatrix(n+1, n, dummyF);
+	float* x = new float[2];
+	x[0] = 0;
+	x[1] = 3.141592;
 
-	float integr = trapz(0, 1, 15, fx);
+	Matrix A = test.eval(x);
+	A.print();
+	
 
-	std::cout << integr;
+	
 	
 }
 
