@@ -1,4 +1,5 @@
 #include "finiteDifferences.h"
+#include "Vector.h"
 
 float centeredDifference(float x0, float delta, std::function<float(float)> f)
 {
@@ -49,6 +50,43 @@ float centered2Difference(float x0, float delta, std::function<float(float)> f)
 {
 	return 0.25 * (f(x0 + delta) - 2 * f(x0) + f(x0 - delta)) / (delta * delta);
 }
+
+float centeredDifferenceMulti(Vector x0, int i, float h, std::function<float(float*)> f)
+{
+	Vector xp = Vector(x0.getN());
+	Vector xm = Vector(x0.getN());
+	xp.base(i);
+	xp = xp * h;
+
+	xm = x0 - xp;
+	xp = x0 + xp;
+
+	return 0.5 * (f(xp.getData()) - f(xm.getData())) / h;
+}
+
+Matrix Jacobian(functionalVector F, float h, Vector x0)
+{
+	int i, j, n;
+	float dfi_dxj;
+
+	n = x0.getN();
+	Matrix jacobian = Matrix(n);
+	i = 0;
+
+	while (i < n) {
+		j = 0;
+		std::function<float(float*)> fi = F.getF(i);
+		while (j < n) {
+			dfi_dxj = centeredDifferenceMulti(x0, j + 1, h, fi);
+			jacobian.setElement(i, j, dfi_dxj);
+			j++;
+		}
+		i++;
+	}
+
+	return jacobian;
+}
+
 
 
 

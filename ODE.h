@@ -40,7 +40,7 @@ public:
 		this->forcing = 1;
 	}
 
-	// EXPLICIT METHODS
+	// EULER'S METHOD 
 	Vector* explicitEulerNoForcing(float deltaT, float T);
 	Vector* explicitEulerForcing(float deltaT, float T);
 	Vector* explicitEuler(float deltaT, float T) {
@@ -48,11 +48,12 @@ public:
 	}
 
 
-	// FIX THIS SHIT 
+	// HEUN'S METHOD           FIX THIS SHIT 
 	Vector* heunNoForcing(float deltaT, float T);
 	Vector* heunForcing(float deltaT, float T);
 	Vector* heun(float deltaT, float T) {
 		return (forcing == 0 ? heunNoForcing(deltaT, T) : heunForcing(deltaT, T));
 	}
+
 };
 

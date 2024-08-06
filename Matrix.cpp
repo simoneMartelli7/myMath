@@ -1,5 +1,6 @@
 #include "Matrix.h"
 #include <iostream>
+#include <fstream>
 
 //BASIC OPERATIONS
 
@@ -41,6 +42,27 @@ void Matrix::print()
 		i++;
 	}
 	std::cout << "\n";
+}
+
+void Matrix::save(std::string filename)
+{
+	std::ofstream myFile;
+	myFile.open(filename);
+
+	int i, j;
+
+	i = 0;
+	while (i < nRows) {
+		j = 0;
+		while (j < nCols) {
+			myFile << getElement(i, j) << ", ";
+			j++;
+		}
+		myFile << "\n";
+		i++;
+	}
+	std::cout << "Matrix saved in '" << filename << "'\n";
+	myFile.close();
 }
 
 Matrix Matrix::scalarProduct(float alpha) {
@@ -581,6 +603,21 @@ int findMaxCol(int col, float* A, int firstRow, int n) {
 		i++;
 	}
 	return maxIndex;
+}
+
+void Matrix::permutation(Matrix& permutation)
+{
+	permutation.identity();
+	float* permutationData = permutation.getData();
+
+	int j = 0;
+
+	while (j < nRows - 1) {
+		int indexMaxColumn = findMaxCol(j, data, j, nRows);
+		switchRows(j, indexMaxColumn);
+		permutation.switchRows(j, indexMaxColumn);
+		j++;
+	}
 }
 std::vector<float> Matrix::gaussianElimination(Matrix& permutation) {
 

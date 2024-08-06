@@ -48,6 +48,8 @@ public:
 	void setElement(int i, float value) { data[i] = value; };
 	//printer
 	void print();
+	//writes to disk 
+	void save(std::string filename);
 
 	//BASIC OPERATIONS
 
@@ -120,6 +122,8 @@ public:
 
 	// FACTORIZATIONS
 	
+	// permutation: every a_ii is =/=0
+	void permutation(Matrix& permutation);
 	// gaussian elimination, works directly on the matrix, returns a vector containing the multiplicative factors used
 	// row permutations are also done in order to have a more robus reduction, the permutation matrix doesn't need to be initialised 
 	std::vector<float> gaussianElimination(Matrix& permutation);

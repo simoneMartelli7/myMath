@@ -103,7 +103,7 @@ polynomial lagrangePoly(Vector& x, Vector& y)
 }
 
 
-//this are mainly for debugging
+//these are mainly for debugging
 Vector createNodes(float lowerLimit, float upperLimit, int nIntervals)
 {
 	float delta = (upperLimit - lowerLimit) / (nIntervals-1);

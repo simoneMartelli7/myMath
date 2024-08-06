@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 
 class Vector
 {
@@ -28,7 +29,7 @@ public:
 			j++;
 		}
 	};
-	//construct a base vector in direction i 
+	//constructs a base vector in direction i 
 	//e.g. base(1) constructs [1; 0; 0] in 3d space
 	void base(int i) {
 		int j = 0;
@@ -63,6 +64,37 @@ public:
 		}
 		std::cout << "\n";
 	};
+
+	//saves to disk
+	void save(std::string filename)
+	{
+		std::ofstream myFile;
+		myFile.open(filename);
+
+		int j = 0;
+		while (j < n) {
+			myFile << getElement(j) << ",\n";
+			j++;
+		}
+		std::cout << "Vector saved in '" << filename << "'\n";
+		myFile.close();
+	}
+
+	// the flag says wheter or not to overwrite the file if it already exists
+	// 1 for appending, 0 otherwise 
+	void save(std::string filename, int flag)
+	{
+		std::ofstream myFile;
+		myFile.open(filename, std::ios_base::app);
+
+		int j = 0;
+		while (j < n) {
+			myFile << getElement(j) << ",\n";
+			j++;
+		}
+		std::cout << "Vector saved in '" << filename << "'\n";
+		myFile.close();
+	}
 
 
 	//getter

@@ -6,13 +6,15 @@
 #include "ODE.h"
 #include "functionalVector.h"
 #include "functionalMatrix.h"
+#include "finiteDifferences.h"
+#include "nonLinearSystems.h"
 
 float fx(float* u) {
-	return 4.0 / (u[0] * u[1] + 1);
+	return 0;
 }
 
 float fy(float* u) {
-	return cos(u[0]) - sin(u[1]);
+	return log(u[0] + 1) + sin(u[0]);
 }
 
 int main() {
@@ -20,21 +22,25 @@ int main() {
 	/*
 	* 
 	* NEED TO IMPLEMENT A FUCKING EIGENVECTOR ALGORITHM, EIGENVALUES ARE OK
+	* 
+	* NON-LINEAR SYSTEMS NEED TO BE IMPROVED 
+	* 
+	* NEED TO ADDD MORE ODE METHODS, I'M NOT SURE HEUN IS WORKING CORRECTLY 
 
 	  */
 
-	/*Matrix A = Matrix(2);
+	Matrix A = Matrix(2);
 	Vector cauchy = Vector(2);
 	float t0 = 0;
 
-	cauchy.setElement(0, 0);
-	cauchy.setElement(1, 1);
+	cauchy.setElement(0, 1);
+	cauchy.setElement(1, 2);
 	A.setElement(0, 0);
 	A.setElement(1, 1);
-	A.setElement(2, -2);
+	A.setElement(2, -3);
 	A.setElement(3, -3);
 
-	std::vector <std::function<float(float)>> testF = { fx, fy };
+	std::vector <std::function<float(float*)>> testF = { fx, fy };
 	functionalVector testV = functionalVector(testF);
 
 	ODE testForcing = ODE(A, cauchy, t0, testV);
@@ -44,16 +50,15 @@ int main() {
 	Vector* uheun = testForcing.heun(0.1, 10);
 	
 	int i = 0;
-	while (i < 5) {
 
-		std::cout << "Euler: \n";
-		uEE[i].print();
-		std::cout << "Heun: \n";
-		uheun[i].print();
+	while (i < 100) {
+
+		uEE[i].save("euler.csv", 1);
+		uheun[i].save("heun.csv", 1);
 		i++;
-	}*/
+	}
 
-	int i = 0;
+	/*int i = 0;
 	std::vector<std::function<float(float*)>> dummyF = { fx, fy, fy, fx };
 	int n = 2;
 	functionalMatrix test = functionalMatrix(n+1, n, dummyF);
@@ -63,6 +68,19 @@ int main() {
 
 	Matrix A = test.eval(x);
 	A.print();
+	
+	float df;
+	Vector x0 = Vector(2);
+	x0.setElement(0, 0);
+	x0.setElement(1, 1);
+	std::vector<std::function<float(float*)>> dummyF = { fx, fy };
+	functionalVector testF = functionalVector(dummyF);
+
+	//Vector test = newton(x0, testF, float(0.0001), 1000, float(0.001));
+	//test.print();
+
+	//Vector result = testF.eval(test.getData());
+	//result.print();*/
 	
 
 	
