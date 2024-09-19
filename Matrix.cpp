@@ -17,6 +17,15 @@ void Matrix::identity()
 	}
 }
 
+void Matrix::zero()
+{
+	int i = 0;
+	while (i < nCols * nRows) {
+		setElement(i, 0.0);
+		i++;
+	}
+}
+
 void Matrix::random() {
 	int k = 0;
 	float value;
@@ -596,8 +605,8 @@ int findMaxCol(int col, float* A, int firstRow, int n) {
 	int i = firstRow + 1;
 
 	while (i < n) {
-		if (abs(A[firstRow * n + col]) > max) {
-			max = abs(A[firstRow * n + col]);
+		if (abs(A[i * n + col]) > max) {
+			max = abs(A[i * n + col]);
 			maxIndex = i;
 		}
 		i++;
@@ -1077,6 +1086,10 @@ Vector Matrix::gradient(Vector& b, Vector& x, float tol, int maxIter)
 		r = rPlus;
 		k++;
 	}
+
+	if (k == maxIter) {
+		std::cout << "The program reached the maximum number of iterations without convergence";
+	}
 	return x;
 }
 
@@ -1103,6 +1116,9 @@ Vector Matrix::gradient(Vector& b)
 		p = rPlus + dummy;
 		r = rPlus;
 		k++;
+	}
+	if (k == maxIter) {
+		std::cout << "The program reached the maximum number of iterations without convergence";
 	}
 	return x;
 }
@@ -1138,7 +1154,7 @@ Vector Matrix::solve(Vector& b)
 
 void Matrix::qrEigen(int maxIterations, float tol, float* eigenValues)
 {
-	std::unordered_map<float, Vector> eigen;
+	//std::unordered_map<float, Vector> eigen;
 	Matrix Q = Matrix(nRows), R = Matrix(nRows), newA = Matrix(nRows), eigenVectors = Matrix(nRows);
 	int numIter, i;
 	float err = 1;

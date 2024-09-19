@@ -8,6 +8,7 @@
 #include "functionalMatrix.h"
 #include "finiteDifferences.h"
 #include "nonLinearSystems.h"
+#include "spline.h"
 
 float fx(float* u) {
 	return 0;
@@ -15,6 +16,10 @@ float fx(float* u) {
 
 float fy(float* u) {
 	return log(u[0] + 1) + sin(u[0]);
+}
+
+float cosX(float x) {
+	return cos(x);
 }
 
 int main() {
@@ -28,7 +33,7 @@ int main() {
 	* NEED TO ADDD MORE ODE METHODS, I'M NOT SURE HEUN IS WORKING CORRECTLY 
 
 	  */
-
+/*
 	Matrix A = Matrix(2);
 	Vector cauchy = Vector(2);
 	float t0 = 0;
@@ -56,7 +61,7 @@ int main() {
 		uEE[i].save("euler.csv", 1);
 		uheun[i].save("heun.csv", 1);
 		i++;
-	}
+	}*/
 
 	/*int i = 0;
 	std::vector<std::function<float(float*)>> dummyF = { fx, fy, fy, fx };
@@ -83,7 +88,22 @@ int main() {
 	//result.print();*/
 	
 
+	Vector nodesX = Vector(5);
+	nodesX.setElement(0, 0.1);
+	nodesX.setElement(1, 0.5);
+	nodesX.setElement(2, 0.6);
+	nodesX.setElement(3, 0.7);
+	nodesX.setElement(4, 1.0);
+
+	Vector nodesY = fillNodes(nodesX, cosX);
+
+
+	nodesX.print();
+	nodesY.print();
 	
-	
+	spline test = spline(nodesX, nodesY, 0.0, centeredDifference(1.0, 0.001, cosX));
+
+	std::cout << cosX(0.82) << " Interpolated value:  " << test.eval(0.82);
+
 }
 

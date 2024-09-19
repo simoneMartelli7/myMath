@@ -33,6 +33,8 @@ public:
 	}
 	//identity matrix
 	void identity();
+	// null matrix 
+	void zero();
 	//initializes the matrix with random numbers in the range [0, 1]
 	void random();
 

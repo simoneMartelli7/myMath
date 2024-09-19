@@ -55,6 +55,15 @@ public:
 			k++;
 		}
 	}
+	// null vector 
+	void zero() 
+	{
+		int i = 0;
+		while (i < n) {
+			setElement(i, 0.0);
+			i++;
+		}
+	}
 	//print
 	void print() {
 		int j = 0;
